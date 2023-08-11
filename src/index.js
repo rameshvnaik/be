@@ -15,7 +15,7 @@ const buildPath = path.join(dirName, '../fe/build');
 app.use(express.static(buildPath));
 
 // All other GET requestsnot handled before will return our React app
-app.get('/', (req, res) => {
+app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../fe/build/index.html'),function (err){
     if(err){
       res.status(500).send(err);
@@ -24,9 +24,9 @@ app.get('/', (req, res) => {
   );
 });
 
-app.get('/weatherInfo', (req, res) => {
-    const weatherURl = `https://api.weatherapi.com/v1/current.json?key=b5939380155d40e892570523231008&q=${req.query.place}&aqi=no`;
-    fetch(weatherURl).then(res => res.json()).then(result => res.send(result)).catch(err => res.send(err))
-});
+// app.get('/weatherInfo', (req, res) => {
+//     const weatherURl = `https://api.weatherapi.com/v1/current.json?key=b5939380155d40e892570523231008&q=${req.query.place}&aqi=no`;
+//     fetch(weatherURl).then(res => res.json()).then(result => res.send(result)).catch(err => res.send(err))
+// });
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
