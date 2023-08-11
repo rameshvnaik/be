@@ -16,7 +16,7 @@ app.use(express.static(buildPath));
 
 // All other GET requests not handled before will return our React app
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(dirName, '../fe/build/index.html'));
+  res.sendFile(path.join(__dirname, '../fe/build/index.html'));
 });
 
 app.get('/weatherInfo', (req, res) => {
