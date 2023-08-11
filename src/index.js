@@ -6,17 +6,22 @@ const app = express();
 const port = 3005;
 
 // Configuring body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 const dirName = path.dirname("");
 const buildPath = path.join(dirName, '../fe/build');
 // Have Node serve the files for our built React app
 app.use(express.static(buildPath));
 
-// All other GET requests not handled before will return our React app
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../fe/build/index.html'));
+// All other GET requestsnot handled before will return our React app
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../fe/build/index.html'),function (err){
+    if(err){
+      res.status(500).send(err);
+    }
+  }
+  );
 });
 
 app.get('/weatherInfo', (req, res) => {
