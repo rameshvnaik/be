@@ -6,8 +6,8 @@ const app = express();
 const port = 3005;
 
 // Configuring body parser middleware
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 const dirName = path.dirname("");
 const buildPath = path.join(dirName, '../fe/build');
@@ -24,9 +24,9 @@ app.get('/', function (req, res) {
   );
 });
 
-// app.get('/weatherInfo', (req, res) => {
-//     const weatherURl = `https://api.weatherapi.com/v1/current.json?key=b5939380155d40e892570523231008&q=${req.query.place}&aqi=no`;
-//     fetch(weatherURl).then(res => res.json()).then(result => res.send(result)).catch(err => res.send(err))
-// });
+app.get('/weatherInfo', (req, res) => {
+    const weatherURl = `https://api.weatherapi.com/v1/current.json?key=b5939380155d40e892570523231008&q=${req.query.place}&aqi=no`;
+    fetch(weatherURl).then(res => res.json()).then(result => res.send(result)).catch(err => res.send(err))
+});
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
